@@ -19,7 +19,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Cache para armazenar o último resultado dos dados de moagem.
 milling_data_cache = None
-miling_data_update = None
+milling_data_update = None
 # Usamos um Lock para garantir que a tarefa em background seja iniciada apenas uma vez.
 background_task_lock = threading.Lock()
 background_task_started = False
@@ -72,6 +72,7 @@ def background_milling_task():
             # Emite para todos os clientes conectados no namespace padrão
             emit('update_milling_data', milling_data_cache)
             emit('api_status', {'stats': 'online', 'last_update': milling_data_update})
+            print('dados emitidos')
 
         # Espera 5 minutos (300 segundos) para a próxima execução.
         # Use socket_io.sleep() para não bloquear o servidor!
