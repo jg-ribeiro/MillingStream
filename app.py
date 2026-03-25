@@ -70,8 +70,8 @@ def background_milling_task():
             milling_data_update = datetime.datetime.now().isoformat()
             print("Cache atualizado. Emitindo 'update_milling_data' para todos os clientes.")
             # Emite para todos os clientes conectados no namespace padrão
-            emit('update_milling_data', milling_data_cache)
-            emit('api_status', {'stats': 'online', 'last_update': milling_data_update})
+            socketio.emit('update_milling_data', milling_data_cache)
+            socketio.emit('api_status', {'stats': 'online', 'last_update': milling_data_update})
             print('dados emitidos')
 
         # Espera 5 minutos (300 segundos) para a próxima execução.
@@ -108,11 +108,11 @@ def handle_connect():
 
 @socketio.on("stats")
 def send_status():
-    emit('api_status', {'stats': 'online', 'last_update': milling_data_update})
+    socketio.emit('api_status', {'stats': 'online', 'last_update': milling_data_update})
 
 @socketio.on("get_data")
 def send_data():
-    emit('api_data', milling_data_cache)
+    socketio.emit('api_data', milling_data_cache)
 
 @socketio.on("mensagem")
 def handle_msg(data):
