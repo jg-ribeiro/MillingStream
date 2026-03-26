@@ -43,6 +43,14 @@ DB_PASS=sua_senha
 SECRET=sua_chave_secreta_aqui
 ```
 
+### Como gerar a chave:
+
+```bash
+python -c "import secrets; print(secrets.token_hex(32))"
+```
+
+copiar o resultado e colocar no .env
+
 ## 🏃 Como Executar
 
 1. Certifique-se de que o Oracle Instant Client está no caminho especificado no `.env`.

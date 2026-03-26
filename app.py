@@ -9,11 +9,11 @@ import datetime
 
 # --- Configuração do Banco de Dados e Query ---
 OracleSession = cfg.get_oracle_session()
+SOCKET_URL = cfg.get_aplication_host()
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "secret"
+app.config["SECRET_KEY"] = cfg.get_aplication_key()
 socketio = SocketIO(app, cors_allowed_origins="*")
-
 
 # --- Cache e Controle da Tarefa em Background ---
 
@@ -81,7 +81,7 @@ def background_milling_task():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", socket_url=SOCKET_URL)
 
 # --- Handlers do Socket.IO ---
 

@@ -83,7 +83,9 @@
 
     <script>
         // Configuração do Socket.io
-        const socket = io('http://localhost:5000');
+        // Configuração movida para o .env
+        const SOCKET_URL = "{{ socket_url }}";
+        const socket = io(SOCKET_URL);
         
         const statusBadge = document.getElementById('status-badge');
         const statusText = document.getElementById('status-text');

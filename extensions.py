@@ -19,7 +19,8 @@ class Config:
     ARRAYSIZE = 15000
 
     _APPLICATION = {
-        "APP_SECRET": os.getenv("SECRET")
+        "APP_SECRET": os.getenv("SECRET", "PutTheKeyBro"),
+        "SRV_HOST": os.getenv("SRV_HOST", "localhost:8020")
     }
 
     # ============================================================================
@@ -28,6 +29,16 @@ class Config:
 
     def __init__(self) -> None:
         self._oracle_engine = self._get_oracle_engine()
+
+    # ============================================================================
+    # ============================= APLICATION ===================================
+    # ============================================================================
+    
+    def get_aplication_key(self) -> str:
+        return self._APPLICATION['APP_SECRET']
+
+    def get_aplication_host(self) -> str:
+        return self._APPLICATION['SRV_HOST']
 
     # ============================================================================
     # ============================== ORACLEDB ====================================
